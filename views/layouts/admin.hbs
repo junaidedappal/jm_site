@@ -1,0 +1,222 @@
+<!-- views/admin.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+    <!-- Add Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Add CKEditor script -->
+  <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
+  <style>
+    
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, #06827c, #34b1aa);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      color: #fff;
+    }
+
+    .navbar-toggler-icon {}
+
+    /* Active link style */
+    .nav-item.active .nav-link {
+      background-color: #f29f69;
+    }
+
+    /* Hover effect for links */
+    .navbar-nav .nav-link:hover {
+      color: #f29f69;
+    }
+
+    /* Navbar styles */
+    .navbar-nav .nav-link {
+      padding: 8px 15px;
+      transition: background-color 0.3s, color 0.3s;
+      border-radius: 7px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background-color: #f29f69;
+      /* Darker background on hover */
+      color: #343a40;
+      /* Lighter text color on hover */
+    }
+
+    /*Sidebar style */
+    .sidebar {
+      width: 250px;
+      height: 100%;
+      position: fixed;
+      background-color: #1e1e2c;
+      padding-top: 60px;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
+    .table-container {
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #dee2e6;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    img {
+      max-width: 50px;
+      max-height: 50px;
+    }
+
+    .action-links {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .sidebar-item {
+      transition: background-color 0.3s;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+
+    .table-header {
+      color: #2c2f3e;
+    }
+
+    /* Make menu items bold and give them a lighter background color */
+    .sidebar-item a {
+      font-weight: bold;
+      background-color: #2c2f3e;
+      color: #fff;
+      border-radius: 5px;
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+    }
+
+    .sidebar-item a:hover {
+      background-color: #f29f69;
+    }
+
+    /* Style for dropdowns */
+    .dropdown-menu {
+      background-color: #2c2f3e;
+      color: #fff;
+    }
+
+      /* Main content styles */
+    .main-content {
+      margin-left: 250px;
+     
+    }
+
+    /* Ensure the main content area has enough space between the fixed sidebar and navbar */
+    @media (min-width: 768px) {
+      .main-content {
+      /* Adjust this based on your navbar height */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Admin Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <!-- Customize the icon, e.g., using Font Awesome -->
+        <i class="fas fa-bars"></i>
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Visit Site</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <ul class="nav flex-column">
+      <li class="nav-item sidebar-item">
+        <a class="nav-link sidebar-link active" href="/admin">Dashboard</a>
+      </li>
+     
+      
+      <li class="nav-item sidebar-item">
+        <a class="nav-link sidebar-link" href="/admin/create-post">Create Post</a>
+      </li>
+      <li class="nav-item sidebar-item">
+        <a href="/logout" class="nav-link sidebar-link">Logout</a>
+        </li>
+      <li class="nav-item sidebar-item">
+        <!-- Example of a dropdown menu -->
+        <div class="dropdown">
+          <a class="nav-link sidebar-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Users
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">All Users</a>
+            <a class="dropdown-item" href="#">Active Users</a>
+            <a class="dropdown-item" href="#">Inactive Users</a>
+          </div>
+        </div>
+      </li>
+      <!-- Add more menu items as needed -->
+    </ul>
+  </div>
+
+  <!-- Main content -->
+  <div class="container main-content">
+   {{{body}}}
+  </div>
+
+  <!-- JavaScript for Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

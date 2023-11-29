@@ -1,0 +1,63 @@
+ 
+  <div class="container">
+    <h1 class="mb-4">Create a New Post</h1>
+    {{#if errors.length}}
+    <div class="alert alert-danger">
+      <strong>Validation Errors:</strong>
+      <ul class="mb-0">
+        {{#each errors}}
+        <li>{{msg}}</li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+    <form action="/admin/create-post" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" name="title" value="{{formData.title}}" required>
+      </div>
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" class="form-control" id="category" name="category" value="{{formData.category}}" required>
+      </div>
+      <div class="form-group">
+        <label for="tags">Tags:</label>
+        <input type="text" class="form-control" id="tags" name="tags" value="{{formData.tags}}" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" class="form-control" id="date" name="date" value="{{formatDate formData.date}}" required>
+      </div>
+      <!-- Add hidden textarea for CKEditor content -->
+      <div class="form-group" style="display: none;">
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="5">{{formData.content}}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="editor">Content:</label>
+        <div id="editor" required>{{formData.content}}</div>
+      </div>
+      <div class="form-group">
+        <label for="image">Image:</label>
+        <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Post</button>
+      <a href="/admin" class="btn btn-secondary ml-2">Cancel</a>
+    </form>
+  </div>
+
+  <!-- Add Bootstrap JS and Popper.js scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    CKEDITOR.replace('editor', {
+      on: {
+        change: function () {
+          // Update the hidden textarea with CKEditor content
+          document.getElementById('content').value = this.getData();
+        }
+      }
+    });
+  </script>

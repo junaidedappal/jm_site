@@ -1,0 +1,43 @@
+ <!-- Header for the table -->
+    <div class="table-header">
+      <h2>Post Data</h2>
+      <!-- Add any additional information or controls for the table header -->
+    </div>
+    <div class="table-container">
+      <table class="table table-striped">
+        <!-- Table content here -->
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Tags</th>
+
+            <th>Image</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each posts}}
+          <tr>
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+            <td>{{category}}</td>
+            <td>{{tags}}</td>
+
+            <td><img src="/{{image}}" alt="{{title}}"></td>
+            <td>{{formatDate date}}</td>
+            <td class="action-links">
+              <a href="/admin/view-post/{{id}}" class="btn btn-primary btn-sm">View</a>
+              <a href="/admin/edit-post/{{id}}" class="btn btn-success btn-sm">Edit</a>
+              <form id="deleteForm" action="/admin/delete-post/{{ id }}" method="post">
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete()">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+
+      </table>
+    </div>
